@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesan untuk Eka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(120deg, #2b5876, #4e4376);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+            color: #333;
+        }
+        .card {
+            background-color: white;
+            padding: 35px 30px;
+            border-radius: 12px;
+            box-shadow: 0 12px 50px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+        }
+        h1 {
+            color: #2b5876;
+            margin-bottom: 25px;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 35px;
+            color: #555;
+        }
+        button {
+            background: linear-gradient(to right, #2b5876, #4e4376);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(43, 88, 118, 0.3);
+            outline: none;
+            letter-spacing: 0.5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        button:hover, button:focus {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(43, 88, 118, 0.4);
+        }
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 4px 8px rgba(43, 88, 118, 0.3);
+        }
+        .btn-decline {
+            background: linear-gradient(to right, #e74c3c, #c0392b);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+            margin-left: 15px;
+        }
+        .btn-decline:hover, .btn-decline:focus {
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+        }
+        .btn-decline:active {
+            box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+        }
+        .page {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: translateY(15px);
+        }
+        .active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .time-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .time-options button {
+            padding: 12px 0;
+            width: 100%;
+            font-size: 15px;
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+            resize: vertical;
+            outline: none;
+            transition: border 0.3s ease;
+            font-size: 15px;
+        }
+        textarea:focus {
+            border-color: #2b5876;
+            box-shadow: 0 0 0 2px rgba(43, 88, 118, 0.2);
+        }
+        @media (max-width: 360px) {
+            h1 {
+                font-size: 22px;
+            }
+            p {
+                font-size: 15px;
+                margin-bottom: 25px;
+            }
+            .card {
+                padding: 25px 18px;
+            }
+            .time-options {
+                grid-template-columns: 1fr;
+            }
+            button {
+                padding: 12px 25px;
+            }
+            .btn-decline {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="page active" id="page1">
+            <h1>Hallo Eka Putri</h1>
+            <p>Ada pesan khusus untukmu...</p>
+            <button onclick="nextPage()">Lanjut</button>
+        </div>
+        
+        <div class="page" id="page2">
+            <h1>Pesan untuk Kamu</h1>
+            <p>Halo maaf ga bales pesan whatsapp nya lagi, aku gatau mau ngomong apa</p>
+            <button onclick="nextPage()">Lanjut</button>
+        </div>
+        
+        <div class="page" id="page3">
+            <h1>Mau Ngobrol?</h1>
+            <p>Kamu Senggang ga ngobrol via call yuk</p>
+            <div class="button-group">
+                <button onclick="nextPage()">Ayok</button>
+                <button class="btn-decline" onclick="showDeclinePage()">Tidak</button>
+            </div>
+        </div>
+        
+        <div class="page" id="page4">
+            <h1>Pilih Waktu</h1>
+            <p>Kapan kamu senggang untuk ngobrol?</p>
+            <div class="time-options">
+                <button onclick="sendWhatsApp('Sore ini')">Sore ini</button>
+                <button onclick="sendWhatsApp('Malam ini')">Malam ini</button>
+                <button onclick="sendWhatsApp('Besok')">Besok</button>
+                <button onclick="sendWhatsApp('Lusa')">Lusa</button>
+            </div>
+        </div>
+        
+        <div class="page" id="page5">
+            <h1>Alasan Penolakan</h1>
+            <p>Silakan tulis alasan kenapa kamu tidak bisa:</p>
+            <textarea id="decline-message" placeholder="Misalnya: Maaf, aku sedang sibuk dengan tugas kuliah..."></textarea>
+            <button onclick="sendDeclineMessage()">Kirim Pesan</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 5;
+        
+        function nextPage() {
+            if (currentPage < totalPages) {
+                document.getElementById(`page${currentPage}`).classList.remove('active');
+                currentPage++;
+                setTimeout(() => {
+                    document.getElementById(`page${currentPage}`).classList.add('active');
+                }, 100);
+            }
+        }
+        
+        function showDeclinePage() {
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('page5').classList.add('active');
+            }, 100);
+        }
+        
+        function sendWhatsApp(time) {
+            const message = `Halo, aku senggang untuk ngobrol pada ${time}`;
+            const encodedMessage = encodeURIComponent(message);
+            window.location.href = `https://wa.me/6282215662010?text=${encodedMessage}`;
+        }
+        
+        function sendDeclineMessage() {
+            const messageInput = document.getElementById('decline-message');
+            let message = messageInput.value.trim();
+            
+            // Jika pesan kosong, gunakan pesan default
+            if (!message) {
+                message = "Maaf, aku sedang tidak bisa ngobrol via call untuk saat ini";
+            }
+            
+            const encodedMessage = encodeURIComponent(message);
+            window.location.href = `https://wa.me/6282215662010?text=${encodedMessage}`;
+        }
+    </script>
+</body>
+</html>
